@@ -1,0 +1,44 @@
+0. óra 7:30-ra elég ide érni (kb. 30 körül van itt)
+
+Teams, itt lehet üzenni 
+viszonylag gyorsan válaszol, double text megengedett
+
+dél körül befejezzük
+
+órák egybe vannak, ha nagyon kell akkor szólunk és van szünet
+ha valakinek problémája van kimehet szó nélkül
+ha beszélni akartok valamiről 4 szemközt ki lehet menni megbeszélni, csak vissza be kell jönni
+
+rendszeresen ne késsünk, olyan probléma miatt mint pl. elalvás
+
+1. pár hét arról szól, hogy felmérjük mennyit tudunk c#-ból
+
+
+projekteket fogunk csinálni
+kitalálunk egy témát pl. webshop és megtervezzük alapoktól a teljesitésig
+backend & frontend része is lesz
+
+
+SQL alapok: táblák, kapcsolatok létrehozása
+
+
+
+Backend:
+	- 
+
+Asztali alkalmazás f.:
+	- 
+
+
+Egyéb:
+	- MsSQL lesz
+	- c# adatbázis kezeléskor nem lesznek SQL kérések írva
+	- 
+
+
+szakdolgozat mérföld kövek majd
+
+nem baj, ha egy témát többször kell elmagyarázni, nyugodtan szóljunk
+
+
+lesz dolgozat is, de nagyrészt beadandók (lassan javítja ki)
