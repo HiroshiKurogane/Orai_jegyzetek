@@ -1,0 +1,44 @@
+adatbázis kell
+	- 4-5 tábla
+		- mindegyik strukturájában, funkcionalitásában különböző
+	- 1-2 kapcsolat
+
+restfull infrastruktura
+	- külön backend
+	- külön frontend
+	- api lehivás server-client comm.
+
+mvc architectura
+	- nincs külön front és backend
+	- van egy lista az alkalmazásban amit elérek az oldalon
+	- kell lennie api végpontnak
+
+kellenek komponensek (reusable code)
+
+mobil eszközre is meg kell csinálni
+	- alkalmazás + mobil alkalmazás
+	- mobil kiváltható responsive weboldallal
+
+tiszta kód elveinek meg kell feleni
+	- megnézik a kódot
+	- a dokumentációban is kell/lehet kód részlet
+
+kell késziteni egy 30-40k karakteres dokumentációt (Anszóköz nem számít bele)
+	- nettó 30 oldal (források, fejjegyzék, csatolmányok nem számitanak bele
+	- séma alapján kell megirni
+	- ez a jegy kb. 60%-a
+	- Teszt kód dokumentáció is kell
+
+Védés kulcspontjai
+	- szoftvercélja
+	- megvalósitás
+	- működés
+	- munkamegosztás
+	- a dokumentációból kérdeznek
+	- kvázi prezentáció
+	- interakció (mutogatás, járkálás)
+	- min. 5 perc angol (tanácsolt összegzőt)
+
+ChatGPT NINCS csak mondat alkotásban
+
+felhasználóbarát design kell
