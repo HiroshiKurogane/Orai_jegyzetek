@@ -1,4 +1,5 @@
 # Tools
+Mindenféle eszköz összevadászva egy helyre, hogy ne kelljen őket jobbra ballra keresgélni az interneten.
 
 ## Database:
  - [Connection strings](https://www.connectionstrings.com/)
@@ -10,10 +11,16 @@
 
  ## API Test
  - [Swagger](https://swagger.io/docs/)
- - Postman
+ - [Postman](https://www.postman.com/)
 
  ## Code images
  - [CodeSnap](https://marketplace.visualstudio.com/items?itemName=adpyke.codesnap)
 
+# Blazor
+- [Componens](https://blazor.radzen.com/)
 
- 
+# Web Utilities
+- [Color Hunt](https://colorhunt.co)
+- [Google Fonts](https://fonts.google.com/)
+- [Icons](https://fontawesome.com/search?p=8&ip=classic&s=solid&ic=free-collection)
+- [Bootstrap](https://getbootstrap.com/)
