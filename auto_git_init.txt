@@ -1,0 +1,14 @@
+echo off
+cls
+cd ./repo
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe init
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe add .
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe commit -m "Added data cleaning script."
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe branch -M main
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe remote add origin https://github.com/yourusername/repository-name.git
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe git push -u origin main
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe add.
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe commit -m "Describe what you changed."
+C:\Users\aczelmi\AppData\Local\Programs\Git\bin\git.exe push
+
+set /p DUMMY=Hit ENTER to exit…
