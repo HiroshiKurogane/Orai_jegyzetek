@@ -26,3 +26,5 @@ Mindenféle eszköz összevadászva egy helyre, hogy ne kelljen őket jobbra bal
 - [Bootstrap](https://getbootstrap.com/)
 - [DDoS stress test](https://jmeter.apache.org/)
 
+# Other 
+- [Logo maker](https://logo.com/)
