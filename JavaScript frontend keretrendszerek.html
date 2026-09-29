@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JavaScript frontend keretrendszerek</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1c2233;--mu:#5b6478;--ac:#4f46e5;--bd:#dfe3ee;--cb:#12172a;--ct:#e6e9f5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1220;--card:#181c30;--tx:#eceffa;--mu:#9aa3bd;--ac:#8b85ff;--bd:#2a3050}}
+:root[data-theme="dark"]{--bg:#0f1220;--card:#181c30;--tx:#eceffa;--mu:#9aa3bd;--ac:#8b85ff;--bd:#2a3050}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column}
+main{flex:1;overflow-y:auto;padding:20px clamp(14px,4vw,48px)}
+.s{display:none;max-width:1100px;margin:0 auto}.s.on{display:block}
+h1{font-size:clamp(28px,6vw,52px);margin:.6em 0 .2em}
+h2{font-size:clamp(22px,4vw,32px);margin:0 0 14px;color:var(--ac)}
+h3{margin:0 0 6px;font-size:22px}
+.lead{color:var(--mu);margin:0 0 10px}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px}
+.c ul{font-size:15px}ul{margin:0;padding-left:20px}li{margin:5px 0}
+pre{background:var(--cb);color:var(--ct);border-radius:10px;padding:10px 12px;overflow-x:auto;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;margin:10px 0 0}
+.t{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;background:var(--card)}
+th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left;vertical-align:top}th{background:var(--ac);color:#fff}
+nav{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px;border-top:1px solid var(--bd);background:var(--card)}
+button{background:var(--ac);color:#fff;border:0;border-radius:8px;padding:8px 16px;font-size:15px;cursor:pointer}
+#n{color:var(--mu);font-size:14px}
+</style>
+</head>
+<body>
+<main id="m"></main>
+<nav><button id="p">← Előző</button><span id="n"></span><button id="x">Következő →</button></nav>
+<script>
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const BIG={
+'React':['A Meta (Facebook) <b>UI-könyvtára</b>. Az oldalt kis, önálló, újrahasználható <b>komponensekből</b> építjük fel, mint a LEGO-elemekből: egy gomb, egy kártya vagy egy teljes űrlap is lehet komponens.','dinamikus webappok és egyoldalas alkalmazások (SPA), például vezérlőpultok, közösségi felületek, admin rendszerek.','Megmondod, <b>hogyan nézzen ki</b> a felület egy adott állapotban. Ha az adat (state) változik, a React egy <b>virtuális DOM</b>-mal (memóriabeli másolat) kiszámolja a különbséget, és csak a megváltozott részt frissíti a böngészőben.','JSX (HTML-szerű szintaxis a JavaScriptben), hookok (useState, useEffect), egyirányú adatfolyam, hatalmas ökoszisztéma (router, állapotkezelők, UI-készletek).','a legnagyobb közösség és munkaerőpiac; rengeteg kész könyvtár és tananyag; rugalmas, sokféle projekthez illeszthető.','csak a felületet adja, az útválasztást, adatlekérést és szerkezetet magadnak kell összeválogatni; a sok választási lehetőség kezdőknek zavaró.','sok interakciót tartalmazó admin felület vagy webapp, ahol később sok fejlesztő fog dolgozni.'],
+'Vue':['Egy <b>progresszív keretrendszer</b>: apránként bevezethető egy meglévő oldalba, de teljes appig is megnő. Egyszerű, HTML-hez közeli sablonokat írsz, a Vue pedig figyeli az adatokat.','kis widgettől (pl. kosárikon) teljes egyoldalas alkalmazásig; közepes üzleti webappok, portálok.','Az adatok <b>reaktívak</b> (ref, reactive): ha egy érték változik, a Vue tudja, mely sablonrészek használják, és csak azokat frissíti. A komponens egy .vue fájlban él: sablon, logika és stílus egy helyen.','.vue fájlok (template + script + style), direktívák (v-if, v-for, v-model), Composition API, hivatalos router (Vue Router) és állapotkezelő (Pinia).','nagyon barátságos tanulási görbe; kiváló dokumentáció; a HTML-hez szokott fejlesztőknek természetes.','kisebb munkaerőpiac, mint a Reacté; nagy csapatokban többféle írásmód (Options és Composition API) keveredhet.','első keretrendszerként, vagy 5-10 oldalas üzleti appnál, ahol gyorsan kell eredmény.'],
+'Angular':['A Google <b>teljes körű keretrendszere</b>, TypeScripttel (típusos JavaScript). Nemcsak a felületet adja, hanem a szerkezetet is: mindent tartalmaz, ami egy nagy apphoz kell.','nagy, hosszú életű vállalati alkalmazások, sok fejlesztős csapatok, belső rendszerek.','A kód <b>komponensekre</b>, <b>szolgáltatásokra</b> és modulokra oszlik. A <b>dependency injection</b> (függőségek automatikus átadása) gondoskodik róla, hogy minden rész megkapja, amire szüksége van. A modern Angular <b>Signals</b>-szal követi az adatváltozást.','TypeScript kötelező, beépített router, űrlapkezelés, HTTP-kliens, tesztelés, parancssori eszköz (Angular CLI), szigorú konvenciók.','egységes szerkezet, ezért nagy csapatban is átlátható; mindent egy helyről kapsz; a típusosság kevesebb hibát jelent.','meredek tanulási görbe (sok fogalom); kisebb projekthez túl sok az előírt kód és szerkezet.','bank vagy biztosító belső rendszere, ahol 10+ fejlesztő dolgozik évekig ugyanazon a kódon.'],
+'Svelte':['Nem hagyományos keretrendszer, hanem <b>fordító (compiler)</b>: build közben a kódodat sima, optimalizált JavaScriptté alakítja, így futáskor szinte nincs keretrendszer-többlet.','gyors, kis méretű webappok, interaktív oldalak, látványos felületek.','A fordító megnézi, melyik változó melyik DOM-részt érinti, és <b>pontosan azt a frissítő kódot generálja</b>. Nincs virtuális DOM-összehasonlítás, ezért kevesebb munkát végez a böngésző.','kevés kód, beépített reaktivitás ($state), .svelte fájlok, beépített animációk; a SvelteKit adja az útválasztást és az SSR-t.','kis csomagméret és gyors működés; nagyon tömör, olvasható kód; élvezetes tanulni.','kisebb ökoszisztéma és kevesebb állás; a fordító „varázslata” néha nehezíti a hibakeresést.','gyors, mobilon is jól futó kisebb app vagy interaktív bemutató, ahol számít a sebesség.'],
+'Next.js':['A Reactre épülő <b>full-stack keretrendszer</b> (a Vercel fejleszti). A Reacthez hozzáadja, ami hiányzik: útválasztást, szerveroldali renderelést és háttérlogikát (API).','SEO-barát weboldalak, webshopok, blogok, teljes webappok egyetlen projektben.','A fájlok mappaszerkezete adja az URL-eket. Az oldalt a <b>szerver előre legenerálja HTML-ként</b> (<b>SSR</b>), így gyorsan megjelenik és a keresők is látják; utána a React „életre kelti” a böngészőben.','fájlalapú router (App Router), SSR és SSG (statikus generálás build időben), szerverkomponensek, API route-ok, képoptimalizálás.','gyors első betöltés és jó SEO; egy helyen van a frontend és a backend; a React-tudás közvetlenül használható.','összetett és gyorsan változó (sok új fogalom); egyes funkciók a Vercel platformon a legkényelmesebbek.','webshop vagy hirdetésből élő oldal, ahol a Google-találat és a gyors betöltés számít.'],
+'Nuxt':['A <b>Vue</b>-hoz készült full-stack keretrendszer, ugyanaz a szerepe, mint a Next.js-nek a Reactnél. Sok mindent magától elintéz, így kevés a beállítás.','SEO-barát Vue-s oldalak, blogok, webshopok, teljes webappok.','A <b>pages/</b> mappába tett .vue fájlokból automatikusan útvonal lesz. A Nuxt szerveren vagy build időben elkészíti a HTML-t, a böngészőben a Vue veszi át az irányítást.','fájlalapú router, <b>auto-import</b> (nem kell kézzel importálni), SSR/SSG, modulrendszer, beépített szerver (Nitro).','kevés beállítással gyorsan indul; megtartja a Vue egyszerűségét; jó fejlesztői élmény.','csak Vue-val használható; kisebb közösség és kevesebb tananyag, mint a Next.js-nél.','egy Vue-s csapat elkészíti a cég blogját vagy termékoldalait jó keresőoptimalizálással.'],
+'Remix':['React-alapú full-stack keretrendszer, ami a <b>webes alapokra</b> épít: URL-ek, űrlapok, HTTP. Ma már a <b>React Router 7</b> része, ugyanaz a csapat viszi tovább.','adat- és űrlapközpontú appok: rendelések, profilok, szerkesztőfelületek.','Minden útvonalhoz tartozik egy <b>loader</b> (a szerver ezzel tölti be az adatot) és egy <b>action</b> (ez dolgozza fel az elküldött űrlapot). Az adatok párhuzamosan érkeznek, az űrlap sima HTML-űrlapként is működik.','beágyazott útvonalak, loader és action, hibakezelés útvonalanként, szerveroldali renderelés.','egyszerű, átlátható adatkezelés; JavaScript nélkül is működő űrlapok; kevés kliensoldali kód.','kisebb közösség és kevesebb tananyag, mint a Next.js-nél; az átnevezések miatt zavaró lehet.','sok űrlapot és listát kezelő üzleti app, ahol fontos az egyszerű adatáramlás.'],
+'Astro':['<b>Tartalomközpontú</b> keretrendszer: alapból <b>nulla JavaScriptet</b> küld a böngészőnek, csak ahol tényleg kell. Ez teszi villámgyorssá a tartalmas oldalakat.','blogok, dokumentációk, marketingoldalak, portfóliók, céges bemutatkozó oldalak.','Az oldal build időben <b>kész HTML-lé</b> alakul. Az interaktív részek (pl. keresőmező) külön <b>szigetek</b> (islands architecture): csak azok kapnak JavaScriptet, a többi statikus marad.','.astro fájlok, Markdown és MDX támogatás, React/Vue/Svelte komponensek keverhetők, <code>client:</code> direktívák a betöltés vezérlésére.','kiváló sebesség és SEO; több keretrendszer együtt használható; egyszerű tartalomkezelés.','erősen interaktív, sok állapotot kezelő appokhoz nem ideális.','céges weboldal vagy blog, ahol néhány interaktív elem (pl. képgaléria) mellett főleg tartalom van.'],
+'Alpine.js':['Pár kilobájtos könyvtár, amivel <b>közvetlenül a HTML-be írt attribútumokkal</b> adhatsz interaktivitást. Nincs build lépés, csak beteszel egy script-tag-et.','apró interakciók: lenyíló menü, felugró ablak (modal), fülek, egyszerű szűrők.','Az <code>x-data</code> attribútummal megadod az elem adatait, a többi attribútum (<code>x-show</code>, <code>@click</code>) ezekhez kötődik. Az Alpine figyeli az adatot, és ennek megfelelően mutat vagy rejt elemeket.','<code>x-data</code>, <code>x-show</code>, <code>x-model</code>, <code>@click</code>; nincs build eszköz; a Vue-hoz hasonló szintaxis; nagyon kicsi.','percek alatt kipróbálható; nem kell átalakítani a projektet; jó pár szerveroldali oldalhoz (Laravel, WordPress).','nagy, összetett appokhoz nem való; kevés beépített szerkezet a kód rendezéséhez.','meglévő, szerveren renderelt oldalra kell lenyíló menü és modal, de nem akarsz teljes keretrendszert.'],
+'htmx':['Attribútumokkal <b>szerverrel beszélgető HTML</b>: a szerver kész HTML-darabot küld vissza, a htmx pedig beilleszti az oldalba, teljes újratöltés nélkül.','dinamikus oldalak JS írása nélkül: élő keresés, „továbbiak betöltése”, űrlapok, admin felületek.','A <code>hx-get</code> megmondja, melyik URL-t hívja meg, a <code>hx-target</code> pedig azt, hová kerüljön az eredmény. A szerver nem JSON-t, hanem <b>HTML-t</b> ad vissza, a htmx ezt cseréli be.','<code>hx-get</code>, <code>hx-post</code>, <code>hx-target</code>, <code>hx-swap</code>; nincs build, ~14 KB; bármilyen backenddel működik (Python, PHP, Go, Java).','nagyon egyszerű, kevés JavaScriptet kell írni; a logika a szerveren marad; gyorsan fejleszthető.','összetett kliensoldali logikát (pl. szerkesztő) nehezen kezel; minden interakció szerverkérés.','szerveroldali (pl. Django vagy Laravel) admin felület élő kereséssel és részleges frissítéssel.'],
+'Preact':['A React <b>3 KB-os</b> kistestvére. Szinte ugyanaz az API, de töredék méretben.','könnyű, React-szerű appok, beágyazható widgetek, lassú hálózaton futó oldalak.','Ugyanúgy komponenseket és hookokat írsz, mint Reactben, de belül egyszerűbb, kisebb megvalósítás fut. A <b>preact/compat</b> réteggel a legtöbb React-könyvtár is működik.','React-szerű komponensek és hookok, ~3 KB méret, gyors, Signals opció, kompatibilitási réteg.','kicsi, gyors betöltés; a React-tudás azonnal használható; könnyen átváltható Reactről.','kisebb ökoszisztéma; néhány újabb React-funkció hiányzik vagy eltér.','chat-widget vagy hirdetési modul, amit más oldalakba kell beágyazni kis mérettel.'],
+'Lit':['Kis könyvtár (<b>~5 KB</b>) a <b>Web Components</b>-hez: saját HTML-elemeket készíthetsz, amik <b>bármely keretrendszerben</b> (vagy anélkül) működnek.','újrahasználható felületi elemek, cégen belüli design system (közös gomb, űrlapmező, kártya).','Egy osztályt írsz, ami böngészőszabvány szerint regisztrál egy saját elemet (<code>&lt;my-btn&gt;</code>). A <b>Shadow DOM</b> elszigeteli a stílust, a Lit pedig reaktív property-kkel gondoskodik a frissítésről.','böngészőszabványra épül, Shadow DOM, reaktív property-k, sablonok, keretrendszertől független.','ugyanaz az elem Reactben, Vue-ban és sima HTML-ben is használható; hosszú távon stabil; kicsi.','kevesebb kényelmi eszköz és tananyag; a Shadow DOM miatt a stílusozás és tesztelés néha trükkösebb.','egy cég több csapata más-más keretrendszerben dolgozik, de ugyanazt a gomb- és űrlapkészletet akarják.']};
+const card=(n,lead,r,code)=>{const B=BIG[n];if(B){lead=B[0];r=B.slice(1)}return `<div class="c"><h3>${n}</h3><p class="lead">${lead}</p><ul><li><b>Mire:</b> ${r[0]}</li><li><b>Hogyan működik:</b> ${r[1]}</li><li><b>Fő jellemzők:</b> ${r[2]}</li><li><b>Előnyök:</b> ${r[3]}</li><li><b>Hátrányok:</b> ${r[4]}</li><li><b>Mikor érdemes:</b> ${r[5]}</li></ul><pre>${esc(code)}</pre></div>`};
+const sl=(t,b)=>`<h2>${t}</h2>${b}`;
+const R=card('React','A Meta <b>UI-könyvtára</b>: az oldalt kis, újrahasználható <b>komponensekből</b> építjük fel.',['dinamikus webappok, egyoldalas alkalmazások (SPA)','JSX (HTML a JS-ben), <b>virtuális DOM</b>, hookok, hatalmas ökoszisztéma','legnagyobb közösség, rengeteg állás és könyvtár','csak a felületet adja: útválasztás, adatkezelés máshonnan jön','sok interakciós elemet tartalmazó admin felület'],
+`function Szamlalo(){
+  const [n,setN]=useState(0);
+  return <button onClick={()=>setN(n+1)}>{n}</button>;
+}`);
+const V=card('Vue','<b>Progresszív keretrendszer</b>: egyszerű HTML-sablonokat írunk, a Vue az adatváltozáskor magától frissíti az oldalt.',['kis widgettől teljes appig','.vue fájlok, <b>reaktivitás</b> (ref), hivatalos router és állapotkezelő (Pinia)','barátságos tanulási görbe, jó dokumentáció','kisebb munkaerőpiac, mint a Reacté','első keretrendszer, közepes üzleti app'],
+`<script setup>const n = ref(0)<\/script>
+<template>
+  <button @click="n++">{{ n }}</button>
+</template>`);
+const A=card('Angular','A Google <b>teljes körű keretrendszere</b> TypeScripttel: minden benne van, ami egy nagy apphoz kell.',['nagy, vállalati alkalmazások, sok fejlesztős csapatok','TypeScript, beépített router, űrlapok, HTTP, <b>dependency injection</b> (függőségek automatikus átadása)','egységes szerkezet, jól skálázódik','meredek tanulási görbe, sok előírt szerkezet','bank vagy biztosító belső rendszere'],
+`@Component({selector:'app-hello',
+  template:'<h1>{{ cim }}</h1>'})
+class Hello { cim = 'Szia!'; }`);
+const S=card('Svelte','<b>Fordító (compiler)</b>: build közben sima JavaScriptté alakítja a kódot, futáskor nincs nagy keretrendszer.',['gyors, kis méretű appok','nincs virtuális DOM, kevés kód, beépített reaktivitás; kiegészítője a SvelteKit','kis csomagméret, tömör kód','kisebb ökoszisztéma és munkaerőpiac','látványos, gyors kis-közepes app'],
+`<script>let n = $state(0);<\/script>
+<button onclick={()=>n++}>{n}</button>`);
+const N=card('Next.js','<b>React-alapú full-stack keretrendszer</b>: a Reacthez útválasztást, szerveroldali renderelést és API-t ad.',['SEO-barát oldalak, webshopok, blogok, appok','fájlalapú router, <b>SSR</b> (a szerver készíti el a HTML-t), SSG, API route-ok','gyors első betöltés, a keresők látják a tartalmat','összetett, gyorsan változik','React-os webshop jó SEO-val'],
+`// app/rolunk/page.js  →  /rolunk
+export default function Page(){
+  return <h1>Rólunk</h1>;
+}`);
+const U=card('Nuxt','Ugyanaz a <b>Vue</b>-hoz, mint a Next.js a Reacthez.',['Vue-alapú, SEO-barát oldalak és appok','<b>fájlalapú router</b> (pages/), auto-import, SSR/SSG, modulok','kevés beállítás, kényelmes','Vue-hoz kötött, kisebb közösség','Vue-s csapat céges oldala, blogja'],
+`<!-- pages/index.vue  →  / -->
+<template><h1>Főoldal</h1></template>`);
+const M=card('Remix','<b>React-alapú full-stack keretrendszer</b> a webes alapokra (URL, űrlap) építve. Ma már a <b>React Router 7</b> része.',['adat- és űrlapközpontú appok','<b>loader</b> (szerveroldali adatbetöltés), <b>action</b> (űrlapfeldolgozás), beágyazott route-ok','egyszerű adatkezelés, JS nélkül is működik','kisebb közösség, mint a Next.js-é','sok űrlapot és adatot kezelő app'],
+`export async function loader(){
+  return getPosts(); // szerveren fut
+}`);
+const T=card('Astro','<b>Tartalomközpontú</b> keretrendszer: alapból <b>nulla JavaScriptet</b> küld a böngészőnek, csak ahol kell.',['blog, dokumentáció, marketing- és céges oldal','<b>islands architecture</b> (interaktív „szigetek”), React/Vue/Svelte keverhető, Markdown','villámgyors oldalak','erősen interaktív appokhoz kevésbé ideális','céges weboldal vagy blog'],
+`---
+import Kartya from './Kartya.jsx';
+---
+<Kartya client:visible />`);
+const AL=card('Alpine.js','Pár KB-os könyvtár, ami <b>HTML-attribútumokkal</b> ad interaktivitást, build nélkül.',['apró interakciók: menü, modal, fülek','<code>x-data</code>, <code>x-show</code>, <code>@click</code>, csak egy script-tag','percek alatt megtanulható','nagy appokhoz nem való','szerveroldali oldalon (pl. Laravel) lenyíló menü'],
+`<div x-data="{open:false}">
+  <button @click="open=!open">Menü</button>
+  <nav x-show="open">...</nav>
+</div>`);
+const H=card('htmx','A HTML-be írt attribútumokkal <b>szerverrel beszélget</b>: a szerver kész HTML-darabot küld, a htmx beilleszti.',['dinamikus oldal JS írása nélkül','<code>hx-get</code>, <code>hx-post</code>, <code>hx-target</code>; nincs JSON, a szerver HTML-t ad','egyszerű, kevés JavaScript','kliensoldali logikához kevés; a szerver terhelődik','élő keresés, admin felület, szerveres app'],
+`<button hx-get="/uzenet" hx-target="#doboz">
+  Betölt
+</button>
+<div id="doboz"></div>`);
+const P=card('Preact','A React <b>3 KB-os</b> kistestvére, majdnem azonos API-val.',['könnyű, React-szerű appok, widgetek','komponensek és hookok ugyanúgy, <code>preact/compat</code> a React-könyvtárakhoz','kicsi és gyors','kisebb ökoszisztéma, néhány React-funkció hiányzik','lassú mobilhálózaton futó oldal'],
+`import { useState } from 'preact/hooks';
+// ugyanaz a kód, mint Reactben`);
+const L=card('Lit','Kis könyvtár <b>Web Components</b>-hez: saját HTML-elemeket készíthetünk, amik minden keretrendszerben működnek.',['újrahasználható elemek, design system','böngészőszabvány, <b>Shadow DOM</b> (elszigetelt stílus), reaktív property-k, ~5 KB','keretrendszertől független','kisebb közösség, kevesebb kényelmi eszköz','cégen belüli komponenskészlet több appban'],
+`class MyBtn extends LitElement {
+  render(){ return html\`<button>Kattints</button>\`; }
+}
+customElements.define('my-btn', MyBtn);`);
+const D=(a,b)=>`<div class="c"><h3>${a}</h3><p class="lead" style="margin:0">${b}</p></div>`;
+const rows=[['React','UI-könyvtár','Komponens-alapú felületek','Közepes','Hatalmas ökoszisztéma','Bonyolult webappok'],['Vue','Keretrendszer','Könnyen tanulható UI','Könnyű','Barátságos, áttekinthető','Közepes üzleti appok'],['Angular','Teljes keretrendszer','Nagy, egységes appok','Nehéz','Mindent tartalmaz','Vállalati rendszerek'],['Svelte','Fordító + keretrendszer','Kis, gyors appok','Könnyű','Kevés kód, kis méret','Gyors, látványos appok'],['Next.js','React meta-keretrendszer','SSR, SEO, full-stack','Közepes','Kész szerkezet Reacthez','Webshop, SEO-s oldal'],['Nuxt','Vue meta-keretrendszer','SSR, SEO, full-stack','Könnyű–közepes','Kényelmes Vue-hoz','Vue-s céges oldalak'],['Remix','React full-stack keretrendszer','Adat és űrlap','Közepes','Egyszerű adatkezelés','Űrlap-központú appok'],['Astro','Tartalom-keretrendszer','Gyors statikus oldal','Könnyű','Alig küld JS-t','Blog, dokumentáció'],['Alpine.js','Könnyű JS-könyvtár','Kis interakciók HTML-ben','Nagyon könnyű','Build nélkül, pár KB','Menü, modal, fülek'],['htmx','HTML-kiterjesztés','Szerver-HTML cseréje','Nagyon könnyű','JS nélküli dinamizmus','Szerveres appok, admin'],['Preact','React-alternatíva','Könnyű React','Közepes','3 KB, React-kompatibilis','Gyors, kis appok'],['Lit','Web Component könyvtár','Saját HTML-elemek','Közepes','Szabvány, bárhol működik','Design system']];
+const tbl=`<div class="t"><table><tr>${['Technológia','Típus','Fő cél','Tanulási nehézség','Legfontosabb előny','Tipikus használat'].map(h=>`<th>${h}</th>`).join('')}</tr>${rows.map(r=>`<tr><td><b>${r[0]}</b></td>${r.slice(1).map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const S_=[
+`<div style="padding:8vh 0"><p class="lead">Kezdőknek – rövid útmutató</p><h1>JavaScript frontend keretrendszerek</h1><p class="lead">React, Vue, Angular, Svelte, Next.js, Nuxt, Remix, Astro, Alpine.js, htmx, Preact, Lit</p></div>`,
+sl('Mi az a frontend framework és mire való?',`<div class="g"><div class="c"><ul><li><b>Frontend</b> = ami a böngészőben látszik és kattintható.</li><li><b>Keretrendszer</b> = kész szerkezet és szabályok az oldal felépítéséhez.</li><li><b>Komponens</b> = újrahasználható darab (gomb, kártya, menü).</li><li><b>SPA</b> = egyoldalas app; <b>SSR</b> = a szerver készíti el a HTML-t.</li></ul></div><div class="c"><b>Így kapcsolódnak egymáshoz:</b><ul><li><b>UI réteg:</b> React, Vue, Angular, Svelte</li><li><b>Meta-keretrendszer</b> (fölé épül): Next.js, Nuxt, Remix, Astro</li><li><b>Könnyű megoldás:</b> Alpine.js, htmx</li><li><b>Változatok:</b> Preact (kis React), Lit (Web Components)</li></ul></div></div>`),
+sl('1. React',`<div class="g" style="grid-template-columns:1fr">${R}</div>`),
+sl('2. Vue',`<div class="g" style="grid-template-columns:1fr">${V}</div>`),
+sl('3. Angular',`<div class="g" style="grid-template-columns:1fr">${A}</div>`),
+sl('4. Svelte',`<div class="g" style="grid-template-columns:1fr">${S}</div>`),
+sl('5. Next.js és Nuxt',`<div class="g">${N}${U}</div>`),
+sl('6. Remix és Astro',`<div class="g">${M}${T}</div>`),
+sl('7. Alpine.js és htmx',`<div class="g">${AL}${H}</div>`),
+sl('8. Preact és Lit',`<div class="g">${P}${L}</div>`),
+sl('A fő különbségek (1/2)',`<div class="g">${D('React vs. Next.js','A <b>React</b> csak a felületet adja. A <b>Next.js</b> a Reactre épül, és hozzáadja az útválasztást, a szerveroldali renderelést és az API-t.')}${D('Vue vs. Nuxt','Ugyanaz a viszony: a <b>Nuxt</b> a Vue „csomagolt”, full-stack változata.')}${D('React/Vue/Angular vs. Svelte','Az előbbiek <b>futás közben</b> dolgoznak (virtuális DOM). A <b>Svelte fordításkor</b> alakítja át a kódot, ezért kisebb és gyorsabb.')}${D('Next.js/Nuxt/Remix vs. Astro','Az első három <b>interaktív appokhoz</b> készült. Az <b>Astro tartalomra</b> optimalizál, és minimális JavaScriptet küld.')}</div>`),
+sl('A fő különbségek (2/2)',`<div class="g">${D('Alpine.js vs. htmx','<b>Alpine.js:</b> a böngészőben, kis interakciókat kezel (menü nyit/zár). <b>htmx:</b> a szerverrel beszélget, HTML-darabokat cserél. Jól kiegészítik egymást.')}${D('React vs. Preact','Ugyanaz az alapötlet és szinte ugyanaz a kód, de a <b>Preact kb. 3 KB</b>, a React jóval nagyobb.')}${D('Web Components és Lit','A <b>Web Components</b> böngészőszabvány saját elemekhez (<code>&lt;my-btn&gt;</code>). A <b>Lit</b> ezt teszi kényelmessé, és bármely keretrendszerben használható.')}</div>`),
+sl('Összehasonlító táblázat',tbl),
+sl('Melyiket mikor érdemes választani?',`<div class="c"><ul><li><b>Nagy, összetett app, sok fejlesztő</b> → Angular</li><li><b>Legtöbb állás, hatalmas ökoszisztéma</b> → React</li><li><b>Barátságos első keretrendszer</b> → Vue vagy Svelte</li><li><b>SEO-s webshop</b> → Next.js (React) vagy Nuxt (Vue)</li><li><b>Űrlap- és adatközpontú app</b> → Remix / React Router</li><li><b>Blog, dokumentáció, céges oldal</b> → Astro</li><li><b>Kis interakció meglévő oldalon</b> → Alpine.js vagy htmx</li><li><b>Kis méret / újrahasználható elemek</b> → Preact / Lit</li></ul></div>`),
+sl('Mit jegyezz meg?',`<div class="g"><div class="c"><ul><li><b>React:</b> komponens-alapú UI-könyvtár, a legnagyobb közösséggel.</li><li><b>Vue:</b> könnyen tanulható, sablonalapú keretrendszer.</li><li><b>Angular:</b> teljes, szigorú keretrendszer nagy projektekhez.</li><li><b>Svelte:</b> fordítóalapú, kis és gyors kimenet.</li><li><b>Next.js:</b> React + útválasztás + szerveroldali renderelés.</li><li><b>Nuxt:</b> ugyanez Vue-val.</li></ul></div><div class="c"><ul><li><b>Remix:</b> űrlap- és adatközpontú React full-stack megoldás (ma React Router 7).</li><li><b>Astro:</b> tartalomoldalak, minimális JavaScripttel.</li><li><b>Alpine.js:</b> apró interakciók HTML-attribútumokkal.</li><li><b>htmx:</b> a szerver HTML-t küld, JS alig kell.</li><li><b>Preact:</b> 3 KB-os, React-kompatibilis változat.</li><li><b>Lit:</b> kényelmes Web Component-ek bármely projekthez.</li></ul></div></div><p class="lead" style="margin-top:14px">Nincs „legjobb” eszköz: a projekt célja dönti el a választást.</p>`)];
+const m=document.getElementById('m'),n=document.getElementById('n');let i=0;
+m.innerHTML=S_.map(h=>`<section class="s">${h}</section>`).join('');
+const ss=m.children;
+function go(k){i=Math.max(0,Math.min(ss.length-1,k));[...ss].forEach((e,j)=>e.classList.toggle('on',j===i));n.textContent=(i+1)+' / '+ss.length;m.scrollTop=0}
+document.getElementById('p').onclick=()=>go(i-1);document.getElementById('x').onclick=()=>go(i+1);
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key===' ')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+go(0);
+</script>
+</body>
+</html>
