@@ -1,0 +1,5 @@
+git status gives back if you current files are up-to-date
+
+in every second a background program check's if your files are up to date
+if they are not: git add. || git commit -m "Auto update"
+else: nothing
