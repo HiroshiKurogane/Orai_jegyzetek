@@ -4,6 +4,7 @@ Mindenféle eszköz összevadászva egy helyre, hogy ne kelljen őket jobbra bal
 ## Database:
  - [Connection strings](https://www.connectionstrings.com/)
  - [Diagram Maker](https://dbdiagram.io/)
+ - [DB docs](https://dbdocs.io/)
 
  ## Git
  - [Git bash basics](https://dev.to/moraa_omwoyo/git-for-beginners-2c7d)
