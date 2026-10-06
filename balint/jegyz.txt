@@ -1,0 +1,10 @@
+október 20.
+GitHub project
+	readme: Mi? Kiknek? Miért? Kik?
+
+Figma terv készités:
+	témakifejtés
+	kiknke: milyen szerepkörök, kik mit tudnak
+	features (kötelező, opcionális)
+	gondolat térkép
+	alkalmazás térkép
