@@ -158,13 +158,13 @@
         .app-card:hover,
         .app-card:focus-visible {
             transform: translateY(-3px);
-            border-color: rgba(255, 255, 255, 0.18);
+            border-width: 4px;
+            border-color: #ffffff;
             outline: none;
         }
 
         .app-card.primary {
             background: linear-gradient(180deg, #8c45db 0%, #8038d4 100%);
-            border: 4px solid #55bfe0;
             padding: 18px 18px 20px;
         }
 
@@ -203,19 +203,6 @@
             text-align: center;
             letter-spacing: -0.03em;
             font-weight: 500;
-        }
-
-        .app-card.primary .app-name {
-            color: #ffe74a;
-        }
-
-        .app-card.discover .app-name,
-        .app-card.jellyfin .app-name {
-            color: #0b1d69;
-        }
-
-        .app-card.kodi .app-name,
-        .app-card.plank .app-name {
             color: rgba(255, 255, 255, 0.95);
         }
 
@@ -291,72 +278,35 @@
             <div class="card-row">
                 <a class="app-card primary" href="https://www.mozilla.org/firefox/" target="_blank" rel="noreferrer" aria-label="Open Firefox">
                     <div class="app-icon">
-                        <svg viewBox="0 0 128 128" aria-hidden="true">
-                            <defs>
-                                <linearGradient id="firefoxBody" x1="24" y1="24" x2="104" y2="104" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0" stop-color="#ffb000"/>
-                                    <stop offset="0.45" stop-color="#ff7b33"/>
-                                    <stop offset="1" stop-color="#ff3d74"/>
-                                </linearGradient>
-                                <linearGradient id="firefoxFlame" x1="40" y1="36" x2="88" y2="92" gradientUnits="userSpaceOnUse">
-                                    <stop offset="0" stop-color="#ffe55b"/>
-                                    <stop offset="1" stop-color="#ff8d00"/>
-                                </linearGradient>
-                            </defs>
-                            <circle cx="64" cy="64" r="50" fill="url(#firefoxBody)"/>
-                            <path d="M92 45c-7-11-23-19-38-13 6 1 12 5 15 10-10-2-20 2-25 10-5 9-4 21 2 29 8 11 25 15 38 9 13-6 22-19 22-33 0-5-1-9-2-12-3 3-7 5-12 5Z" fill="url(#firefoxFlame)"/>
-                            <path d="M53 88c-8-7-11-18-8-28 4-12 15-20 27-21-6 3-10 8-12 14 9-4 20-2 28 4 5 4 8 10 10 16-2 12-12 23-25 26-8 2-14 1-20-3Z" fill="#9b31ff" opacity="0.8"/>
-                            <path d="M82 87c-7 3-16 2-22-2-7-4-11-12-10-20 1-7 5-13 10-17-1 5 1 9 5 12 6 4 14 4 20 1 6-3 9-8 10-14 4 6 5 13 3 20-2 9-8 16-16 20Z" fill="#f1f0ff" opacity="0.8"/>
-                        </svg>
+                        <img src="assets/icons/firefox.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Firefox</div>
                 </a>
 
                 <div class="app-card kodi" aria-label="Kodi">
                     <div class="app-icon">
-                        <svg viewBox="0 0 128 128" aria-hidden="true">
-                            <path d="M64 16 96 48 64 80 32 48 64 16Z" fill="#ecf7ff"/>
-                            <path d="M64 48 88 72 64 96 40 72 64 48Z" fill="#4fc0e5"/>
-                            <path d="M64 72 82 90 64 108 46 90 64 72Z" fill="#1f98d1"/>
-                            <path d="M30 50 48 68 30 86 12 68 30 50Z" fill="#4fc0e5"/>
-                            <path d="M98 50 116 68 98 86 80 68 98 50Z" fill="#4fc0e5"/>
-                        </svg>
+                        <img src="assets/icons/kodi.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Kodi</div>
                 </div>
 
                 <div class="app-card plank" aria-label="Plank Player">
                     <div class="app-icon">
-                        <svg viewBox="0 0 128 128" aria-hidden="true">
-                            <rect x="16" y="16" width="96" height="96" rx="8" fill="#4c8fd3"/>
-                            <path d="M64 30v48" stroke="#ecf4ff" stroke-width="8" stroke-linecap="round"/>
-                            <path d="M50 46a14 14 0 1 1 28 0" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
-                            <path d="M38 82c8 8 18 12 26 12s18-4 26-12" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
-                        </svg>
+                        <img src="assets/icons/plank-player.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Plank Player</div>
                 </div>
 
                 <div class="app-card discover" aria-label="Discover">
                     <div class="app-icon">
-                        <svg viewBox="0 0 128 128" aria-hidden="true">
-                            <rect x="18" y="18" width="92" height="92" rx="10" fill="#1f94eb"/>
-                            <path d="M34 32h60l-6 20H40l-6-20Z" fill="#59c5ff"/>
-                            <path d="M38 44h52l-4 48-14 8-14-8-6-10-14-38Z" fill="#0e72c8" opacity="0.75"/>
-                            <path d="M64 52v28" stroke="#dff7ff" stroke-width="8" stroke-linecap="round"/>
-                            <path d="m52 64 12 12 12-12" stroke="#dff7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        </svg>
+                        <img src="assets/icons/discover.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Discover</div>
                 </div>
 
                 <div class="app-card jellyfin" aria-label="Jellyfin Media Player">
                     <div class="app-icon">
-                        <svg viewBox="0 0 128 128" aria-hidden="true">
-                            <path d="M64 16 104 96 64 112 24 96 64 16Z" fill="#b65ad6" opacity="0.45"/>
-                            <path d="M64 28 94 86 64 98 34 86 64 28Z" fill="none" stroke="#b156d4" stroke-width="10" stroke-linejoin="round"/>
-                            <path d="M64 42 82 75 64 82 46 75 64 42Z" fill="none" stroke="#7ec8ff" stroke-width="10" stroke-linejoin="round" opacity="0.7"/>
-                        </svg>
+                        <img src="assets/icons/jellyfin.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Jellyfin Media Player</div>
                 </div>
@@ -371,6 +321,8 @@
         const weatherPlace = document.getElementById('weather-place');
         const weatherSummary = document.getElementById('weather-summary');
         const weatherTemp = document.getElementById('weather-temp');
+        const weatherCacheKey = 'homescreen-weather-cache';
+        const weatherCacheTtl = 2 * 60 * 60 * 1000;
 
         const timeFormatter = new Intl.DateTimeFormat('en', {
             hour: 'numeric',
@@ -415,7 +367,56 @@
             return labels[code] || 'Local conditions';
         }
 
+        function readWeatherCache() {
+            try {
+                const cached = JSON.parse(localStorage.getItem(weatherCacheKey));
+                if (!cached || typeof cached.savedAt !== 'number') {
+                    return null;
+                }
+
+                if (Date.now() - cached.savedAt > weatherCacheTtl) {
+                    return null;
+                }
+
+                return cached;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function writeWeatherCache(data) {
+            try {
+                localStorage.setItem(weatherCacheKey, JSON.stringify({
+                    ...data,
+                    savedAt: Date.now()
+                }));
+            } catch (error) {
+                // Ignore storage failures and fall back to live fetches.
+            }
+        }
+
+        function applyWeatherState(state) {
+            weatherPlace.textContent = state.place || 'Your area';
+            weatherSummary.textContent = state.summary || 'Offline mode';
+            weatherTemp.textContent = state.temp || '--°';
+        }
+
         async function loadWeather() {
+            const cachedWeather = readWeatherCache();
+            if (cachedWeather) {
+                applyWeatherState(cachedWeather);
+                return;
+            }
+
+            if (!navigator.onLine) {
+                applyWeatherState({
+                    place: 'Your area',
+                    summary: 'Offline mode',
+                    temp: '--°'
+                });
+                return;
+            }
+
             try {
                 const locationResponse = await fetch('https://ipwho.is/');
                 if (!locationResponse.ok) {
@@ -428,7 +429,6 @@
                 }
 
                 const place = [location.city || location.region || 'Your area', location.country || ''].filter(Boolean).join(', ');
-                weatherPlace.textContent = place;
 
                 const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,weather_code&timezone=auto`);
                 if (!weatherResponse.ok) {
@@ -436,12 +436,20 @@
                 }
 
                 const weather = await weatherResponse.json();
-                weatherTemp.textContent = `${Math.round(weather.current.temperature_2m)}°`;
-                weatherSummary.textContent = weatherLabel(weather.current.weather_code);
+                const state = {
+                    place,
+                    summary: weatherLabel(weather.current.weather_code),
+                    temp: `${Math.round(weather.current.temperature_2m)}°`
+                };
+
+                applyWeatherState(state);
+                writeWeatherCache(state);
             } catch (error) {
-                weatherPlace.textContent = 'Your area';
-                weatherSummary.textContent = 'Weather unavailable right now';
-                weatherTemp.textContent = '--°';
+                applyWeatherState({
+                    place: 'Your area',
+                    summary: 'Offline mode',
+                    temp: '--°'
+                });
             }
         }
 

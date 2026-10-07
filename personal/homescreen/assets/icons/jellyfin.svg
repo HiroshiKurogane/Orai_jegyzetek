@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Jellyfin Media Player">
+  <path d="M64 16 104 96 64 112 24 96 64 16Z" fill="#b65ad6" opacity="0.45"/>
+  <path d="M64 28 94 86 64 98 34 86 64 28Z" fill="none" stroke="#b156d4" stroke-width="10" stroke-linejoin="round"/>
+  <path d="M64 42 82 75 64 82 46 75 64 42Z" fill="none" stroke="#7ec8ff" stroke-width="10" stroke-linejoin="round" opacity="0.7"/>
+</svg>

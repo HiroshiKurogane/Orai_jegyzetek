@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Firefox">
+  <defs>
+    <linearGradient id="firefoxBody" x1="24" y1="24" x2="104" y2="104" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffb000"/>
+      <stop offset="0.45" stop-color="#ff7b33"/>
+      <stop offset="1" stop-color="#ff3d74"/>
+    </linearGradient>
+    <linearGradient id="firefoxFlame" x1="40" y1="36" x2="88" y2="92" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffe55b"/>
+      <stop offset="1" stop-color="#ff8d00"/>
+    </linearGradient>
+  </defs>
+  <circle cx="64" cy="64" r="50" fill="url(#firefoxBody)"/>
+  <path d="M92 45c-7-11-23-19-38-13 6 1 12 5 15 10-10-2-20 2-25 10-5 9-4 21 2 29 8 11 25 15 38 9 13-6 22-19 22-33 0-5-1-9-2-12-3 3-7 5-12 5Z" fill="url(#firefoxFlame)"/>
+  <path d="M53 88c-8-7-11-18-8-28 4-12 15-20 27-21-6 3-10 8-12 14 9-4 20-2 28 4 5 4 8 10 10 16-2 12-12 23-25 26-8 2-14 1-20-3Z" fill="#9b31ff" opacity="0.8"/>
+  <path d="M82 87c-7 3-16 2-22-2-7-4-11-12-10-20 1-7 5-13 10-17-1 5 1 9 5 12 6 4 14 4 20 1 6-3 9-8 10-14 4 6 5 13 3 20-2 9-8 16-16 20Z" fill="#f1f0ff" opacity="0.8"/>
+</svg>
