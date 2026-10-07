@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Homescreen</title>
+    <style>
+        :root {
+            color-scheme: dark;
+            --text: #f6f8fb;
+            --muted: rgba(246, 248, 251, 0.72);
+            --line: rgba(255, 255, 255, 0.12);
+            --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+            --purple: #8b45df;
+            --purple-2: #a25af0;
+            --blue: #255d88;
+            --navy: #272a2f;
+            --slate: #3c3f45;
+            --light: #8d94d4;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            font-family: "Segoe UI Variable Display", "Segoe UI Variable", "Aptos", "Trebuchet MS", sans-serif;
+            color: var(--text);
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 18% 10%, rgba(24, 90, 120, 0.68), transparent 28%),
+                radial-gradient(circle at 80% 16%, rgba(181, 115, 62, 0.46), transparent 24%),
+                linear-gradient(180deg, rgba(8, 12, 18, 0.18), rgba(8, 12, 18, 0.56)),
+                linear-gradient(90deg, #182f39 0%, #0f1f2a 36%, #09131c 58%, #6a452e 100%);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)),
+                radial-gradient(circle at 50% 55%, rgba(13, 19, 27, 0.05), rgba(13, 19, 27, 0.58) 70%);
+            pointer-events: none;
+        }
+
+        .screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 44px 58px 32px;
+            display: grid;
+            grid-template-rows: auto auto 1fr auto;
+            gap: 28px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 18px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-icon {
+            width: 28px;
+            height: 28px;
+            color: rgba(255, 255, 255, 0.9);
+            opacity: 0.92;
+            flex: 0 0 auto;
+        }
+
+        .hero {
+            display: grid;
+            gap: 14px;
+            align-content: start;
+            position: relative;
+            z-index: 1;
+            max-width: 540px;
+            padding-left: 4px;
+        }
+
+        .clock {
+            font-size: clamp(5.2rem, 10vw, 8.2rem);
+            line-height: 0.9;
+            font-weight: 300;
+            letter-spacing: -0.08em;
+            text-shadow: 0 2px 22px rgba(0, 0, 0, 0.24);
+        }
+
+        .date {
+            font-size: clamp(1.8rem, 3.1vw, 2.8rem);
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+        }
+
+        .weather {
+            display: grid;
+            gap: 5px;
+            margin-top: 2px;
+        }
+
+        .weather .city {
+            font-size: 1.18rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .weather .summary {
+            font-size: 1.02rem;
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        .section-title {
+            margin: 0 0 18px;
+            font-size: clamp(1.9rem, 3vw, 3rem);
+            line-height: 1;
+            font-weight: 300;
+            letter-spacing: -0.05em;
+            color: rgba(255, 255, 255, 0.98);
+        }
+
+        .favorites {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .app-card {
+            min-height: 220px;
+            border-radius: 26px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(33, 35, 40, 0.92);
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-rows: 1fr auto;
+            gap: 18px;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+        }
+
+        .app-card:hover,
+        .app-card:focus-visible {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, 0.18);
+            outline: none;
+        }
+
+        .app-card.primary {
+            background: linear-gradient(180deg, #8c45db 0%, #8038d4 100%);
+            border: 4px solid #55bfe0;
+            padding: 18px 18px 20px;
+        }
+
+        .app-card.kodi {
+            background: #131313;
+        }
+
+        .app-card.plank {
+            background: #33373d;
+        }
+
+        .app-card.discover {
+            background: #235478;
+        }
+
+        .app-card.jellyfin {
+            background: #8c96d8;
+        }
+
+        .app-icon {
+            display: grid;
+            place-items: center;
+            align-self: center;
+        }
+
+        .app-icon img,
+        .app-icon svg {
+            width: min(118px, 76%);
+            height: auto;
+            display: block;
+        }
+
+        .app-name {
+            font-size: 1.6rem;
+            line-height: 1;
+            text-align: center;
+            letter-spacing: -0.03em;
+            font-weight: 500;
+        }
+
+        .app-card.primary .app-name {
+            color: #ffe74a;
+        }
+
+        .app-card.discover .app-name,
+        .app-card.jellyfin .app-name {
+            color: #0b1d69;
+        }
+
+        .app-card.kodi .app-name,
+        .app-card.plank .app-name {
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        @media (max-width: 1400px) {
+            .card-row {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 900px) {
+            body {
+                overflow: auto;
+            }
+
+            .screen {
+                min-height: 100%;
+                height: auto;
+                padding: 26px 20px 28px;
+                gap: 22px;
+            }
+
+            .card-row {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .app-card {
+                min-height: 180px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .topbar {
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                max-width: none;
+            }
+
+            .clock {
+                font-size: clamp(4rem, 18vw, 5.6rem);
+            }
+
+            .date {
+                font-size: clamp(1.45rem, 7vw, 2rem);
+            }
+
+            .card-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="screen">
+        <header class="topbar" aria-label="System status">
+            <svg class="status-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7.2 6.2a7 7 0 1 0 9.6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </header>
+
+        <section class="hero" aria-live="polite">
+            <div class="clock" id="clock">--:--</div>
+            <div class="date" id="date">Loading date</div>
+            <div class="weather">
+                <div class="city" id="weather-place">Waiting for network response</div>
+                <div class="summary" id="weather-summary">Finding your location...</div>
+                <div class="summary" id="weather-temp">--°</div>
+            </div>
+        </section>
+
+        <section class="favorites" aria-label="Favorites">
+            <h2 class="section-title">Favorites</h2>
+            <div class="card-row">
+                <a class="app-card primary" href="https://www.mozilla.org/firefox/" target="_blank" rel="noreferrer" aria-label="Open Firefox">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 128 128" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="firefoxBody" x1="24" y1="24" x2="104" y2="104" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0" stop-color="#ffb000"/>
+                                    <stop offset="0.45" stop-color="#ff7b33"/>
+                                    <stop offset="1" stop-color="#ff3d74"/>
+                                </linearGradient>
+                                <linearGradient id="firefoxFlame" x1="40" y1="36" x2="88" y2="92" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0" stop-color="#ffe55b"/>
+                                    <stop offset="1" stop-color="#ff8d00"/>
+                                </linearGradient>
+                            </defs>
+                            <circle cx="64" cy="64" r="50" fill="url(#firefoxBody)"/>
+                            <path d="M92 45c-7-11-23-19-38-13 6 1 12 5 15 10-10-2-20 2-25 10-5 9-4 21 2 29 8 11 25 15 38 9 13-6 22-19 22-33 0-5-1-9-2-12-3 3-7 5-12 5Z" fill="url(#firefoxFlame)"/>
+                            <path d="M53 88c-8-7-11-18-8-28 4-12 15-20 27-21-6 3-10 8-12 14 9-4 20-2 28 4 5 4 8 10 10 16-2 12-12 23-25 26-8 2-14 1-20-3Z" fill="#9b31ff" opacity="0.8"/>
+                            <path d="M82 87c-7 3-16 2-22-2-7-4-11-12-10-20 1-7 5-13 10-17-1 5 1 9 5 12 6 4 14 4 20 1 6-3 9-8 10-14 4 6 5 13 3 20-2 9-8 16-16 20Z" fill="#f1f0ff" opacity="0.8"/>
+                        </svg>
+                    </div>
+                    <div class="app-name">Firefox</div>
+                </a>
+
+                <div class="app-card kodi" aria-label="Kodi">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 128 128" aria-hidden="true">
+                            <path d="M64 16 96 48 64 80 32 48 64 16Z" fill="#ecf7ff"/>
+                            <path d="M64 48 88 72 64 96 40 72 64 48Z" fill="#4fc0e5"/>
+                            <path d="M64 72 82 90 64 108 46 90 64 72Z" fill="#1f98d1"/>
+                            <path d="M30 50 48 68 30 86 12 68 30 50Z" fill="#4fc0e5"/>
+                            <path d="M98 50 116 68 98 86 80 68 98 50Z" fill="#4fc0e5"/>
+                        </svg>
+                    </div>
+                    <div class="app-name">Kodi</div>
+                </div>
+
+                <div class="app-card plank" aria-label="Plank Player">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 128 128" aria-hidden="true">
+                            <rect x="16" y="16" width="96" height="96" rx="8" fill="#4c8fd3"/>
+                            <path d="M64 30v48" stroke="#ecf4ff" stroke-width="8" stroke-linecap="round"/>
+                            <path d="M50 46a14 14 0 1 1 28 0" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
+                            <path d="M38 82c8 8 18 12 26 12s18-4 26-12" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="app-name">Plank Player</div>
+                </div>
+
+                <div class="app-card discover" aria-label="Discover">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 128 128" aria-hidden="true">
+                            <rect x="18" y="18" width="92" height="92" rx="10" fill="#1f94eb"/>
+                            <path d="M34 32h60l-6 20H40l-6-20Z" fill="#59c5ff"/>
+                            <path d="M38 44h52l-4 48-14 8-14-8-6-10-14-38Z" fill="#0e72c8" opacity="0.75"/>
+                            <path d="M64 52v28" stroke="#dff7ff" stroke-width="8" stroke-linecap="round"/>
+                            <path d="m52 64 12 12 12-12" stroke="#dff7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="app-name">Discover</div>
+                </div>
+
+                <div class="app-card jellyfin" aria-label="Jellyfin Media Player">
+                    <div class="app-icon">
+                        <svg viewBox="0 0 128 128" aria-hidden="true">
+                            <path d="M64 16 104 96 64 112 24 96 64 16Z" fill="#b65ad6" opacity="0.45"/>
+                            <path d="M64 28 94 86 64 98 34 86 64 28Z" fill="none" stroke="#b156d4" stroke-width="10" stroke-linejoin="round"/>
+                            <path d="M64 42 82 75 64 82 46 75 64 42Z" fill="none" stroke="#7ec8ff" stroke-width="10" stroke-linejoin="round" opacity="0.7"/>
+                        </svg>
+                    </div>
+                    <div class="app-name">Jellyfin Media Player</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const clockTarget = document.getElementById('clock');
+        const dateTarget = document.getElementById('date');
+        const weatherPlace = document.getElementById('weather-place');
+        const weatherSummary = document.getElementById('weather-summary');
+        const weatherTemp = document.getElementById('weather-temp');
+
+        const timeFormatter = new Intl.DateTimeFormat('en', {
+            hour: 'numeric',
+            minute: '2-digit'
+        });
+
+        const dateFormatter = new Intl.DateTimeFormat('en', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+
+        function refreshClock() {
+            const now = new Date();
+            clockTarget.textContent = timeFormatter.format(now).replace('AM', 'am').replace('PM', 'pm');
+            dateTarget.textContent = dateFormatter.format(now);
+        }
+
+        function weatherLabel(code) {
+            const labels = {
+                0: 'Clear sky',
+                1: 'Mainly clear',
+                2: 'Partly cloudy',
+                3: 'Overcast',
+                45: 'Foggy',
+                48: 'Rime fog',
+                51: 'Light drizzle',
+                53: 'Drizzle',
+                55: 'Heavy drizzle',
+                61: 'Light rain',
+                63: 'Rain',
+                65: 'Heavy rain',
+                71: 'Light snow',
+                73: 'Snow',
+                75: 'Heavy snow',
+                80: 'Rain showers',
+                81: 'Rain showers',
+                82: 'Heavy showers',
+                95: 'Thunderstorm'
+            };
+
+            return labels[code] || 'Local conditions';
+        }
+
+        async function loadWeather() {
+            try {
+                const locationResponse = await fetch('https://ipwho.is/');
+                if (!locationResponse.ok) {
+                    throw new Error('Location lookup failed');
+                }
+
+                const location = await locationResponse.json();
+                if (!location.success || typeof location.latitude !== 'number' || typeof location.longitude !== 'number') {
+                    throw new Error('Missing coordinates');
+                }
+
+                const place = [location.city || location.region || 'Your area', location.country || ''].filter(Boolean).join(', ');
+                weatherPlace.textContent = place;
+
+                const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,weather_code&timezone=auto`);
+                if (!weatherResponse.ok) {
+                    throw new Error('Weather lookup failed');
+                }
+
+                const weather = await weatherResponse.json();
+                weatherTemp.textContent = `${Math.round(weather.current.temperature_2m)}°`;
+                weatherSummary.textContent = weatherLabel(weather.current.weather_code);
+            } catch (error) {
+                weatherPlace.textContent = 'Your area';
+                weatherSummary.textContent = 'Weather unavailable right now';
+                weatherTemp.textContent = '--°';
+            }
+        }
+
+        refreshClock();
+        loadWeather();
+        setInterval(refreshClock, 1000);
+    </script>
+</body>
+</html>
