@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Discover">
-  <rect x="18" y="18" width="92" height="92" rx="10" fill="#1f94eb"/>
-  <path d="M34 32h60l-6 20H40l-6-20Z" fill="#59c5ff"/>
-  <path d="M38 44h52l-4 48-14 8-14-8-6-10-14-38Z" fill="#0e72c8" opacity="0.75"/>
-  <path d="M64 52v28" stroke="#dff7ff" stroke-width="8" stroke-linecap="round"/>
-  <path d="m52 64 12 12 12-12" stroke="#dff7ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-</svg>

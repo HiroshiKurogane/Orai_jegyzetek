@@ -9,10 +9,6 @@
 </head>
 <body>
     <main class="screen">
-        <header class="topbar" aria-label="System status">
-            <svg class="status-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7.2 6.2a7 7 0 1 0 9.6 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        </header>
-
         <section class="hero" aria-live="polite">
             <div class="clock" id="clock">--:--</div>
             <div class="date" id="date">Loading date</div>
@@ -26,40 +22,35 @@
         <section class="favorites" aria-label="Favorites">
             <h2 class="section-title">Favorites</h2>
             <div class="card-row">
-                <a class="app-card primary" href="https://www.mozilla.org/firefox/" target="_blank" rel="noreferrer" aria-label="Open Firefox">
+                <a class="app-card youtube" href="https://www.youtube.com/" rel="noreferrer" aria-label="Open YouTube">
                     <div class="app-icon">
-                        <img src="assets/icons/firefox.svg" alt="" aria-hidden="true">
+                        <img src="assets/icons/youtube.svg" alt="" aria-hidden="true">
                     </div>
-                    <div class="app-name">Firefox</div>
+                    <div class="app-name">YouTube</div>
                 </a>
 
-                <div class="app-card kodi" aria-label="Kodi">
+                <a class="app-card netflix" href="https://www.netflix.com/" rel="noreferrer" aria-label="netflix" >
                     <div class="app-icon">
-                        <img src="assets/icons/kodi.svg" alt="" aria-hidden="true">
+                        <img src="assets/icons/netflix.svg" alt="" aria-hidden="true">
                     </div>
-                    <div class="app-name">Kodi</div>
-                </div>
+                    <div class="app-name">Netflix</div>
+                </a>
+                
 
-                <div class="app-card plank" aria-label="Plank Player">
-                    <div class="app-icon">
-                        <img src="assets/icons/plank-player.svg" alt="" aria-hidden="true">
-                    </div>
-                    <div class="app-name">Plank Player</div>
-                </div>
-
-                <div class="app-card discover" aria-label="Discover">
-                    <div class="app-icon">
-                        <img src="assets/icons/discover.svg" alt="" aria-hidden="true">
-                    </div>
-                    <div class="app-name">Discover</div>
-                </div>
-
-                <div class="app-card jellyfin" aria-label="Jellyfin Media Player">
+                <a class="app-card jellyfin" href="https://jellyfin.levi0725.hu/web/" rel="noreferrer" aria-label="Jellyfin Media Player">
                     <div class="app-icon">
                         <img src="assets/icons/jellyfin.svg" alt="" aria-hidden="true">
                     </div>
                     <div class="app-name">Jellyfin Media Player</div>
-                </div>
+                </a>
+
+                
+                <a class="app-card blank" href="https://mozisarok.hu/" rel="noreferrer" aria-label="MoziSarok">
+                    <div class="app-icon">
+                        <img src="assets/icons/jellyfin.svg" alt="" aria-hidden="true">
+                    </div>
+                    <div class="app-name">Jellyfin Media Player</div>
+                </a>
             </div>
         </section>
 

@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Plank Player">
-  <rect x="16" y="16" width="96" height="96" rx="8" fill="#4c8fd3"/>
-  <path d="M64 30v48" stroke="#ecf4ff" stroke-width="8" stroke-linecap="round"/>
-  <path d="M50 46a14 14 0 1 1 28 0" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
-  <path d="M38 82c8 8 18 12 26 12s18-4 26-12" stroke="#ecf4ff" stroke-width="7" stroke-linecap="round" fill="none"/>
-</svg>
