@@ -1,3 +1,8 @@
+   const bg_num = Math.floor(Math.random() * 9);
+   var r = document.querySelector(':root');
+    r.style.setProperty('--bg', "url('../bg_" + bg_num + ".png')");
+
+
    const clockTarget = document.getElementById('clock');
         const dateTarget = document.getElementById('date');
         const weatherPlace = document.getElementById('weather-place');

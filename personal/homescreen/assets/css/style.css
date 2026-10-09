@@ -10,6 +10,7 @@
             --navy: #272a2f;
             --slate: #3c3f45;
             --light: #8d94d4;
+            --bg: url("../bg_0.png");
         }
 
         * {
@@ -27,11 +28,9 @@
             font-family: "Segoe UI Variable Display", "Segoe UI Variable", "Aptos", "Trebuchet MS", sans-serif;
             color: var(--text);
             overflow: hidden;
-            background:
-                radial-gradient(circle at 18% 10%, rgba(24, 90, 120, 0.68), transparent 28%),
-                radial-gradient(circle at 80% 16%, rgba(181, 115, 62, 0.46), transparent 24%),
-                linear-gradient(180deg, rgba(8, 12, 18, 0.18), rgba(8, 12, 18, 0.56)),
-                linear-gradient(90deg, #182f39 0%, #0f1f2a 36%, #09131c 58%, #6a452e 100%);
+            background: var(--bg);
+            background-size: cover;
+            backdrop-filter: blur(4px);
         }
 
         body::before {
